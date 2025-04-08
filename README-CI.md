@@ -16,8 +16,8 @@ The project encases docker. It is a container manager that will create, run , an
  
   * Sources
     * [Course Notes and Inclass demonstrations on docker installation and docker run command](https://github.com/pattonsgirl/CEG3120/blob/main/CourseNotes/containers.md)
-    * [Docker Run How to](https://docs.docker.com/reference/cli/docker/container/run/) 
-    * [DockerFile How to](https://dev.to/rodrigokamada/creating-and-running-an-angular-application-in-a-docker-container-40mk)
+    * [Docker Run TODO](https://docs.docker.com/reference/cli/docker/container/run/) 
+    * [DockerFile TODO](https://dev.to/rodrigokamada/creating-and-running-an-angular-application-in-a-docker-container-40mk)
 
 ## DockerHub Details 
 
