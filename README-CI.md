@@ -29,15 +29,27 @@ The project encases docker. It is a container manager that will create, run , an
     * copy , copies the files in the extracted angular site to the default content directory.
     * When read by docker, and container is run, it will install the content dependencies like when it was done manually.
     * To make it personalized, I exposed port 3000, maybe referencing avengers and created the container to serve it as local hosts.
-    * After successfullty bulding Dockerfile,**Note: After troubleshooting, Dockerfile naming is case sensitive**, to verify the container is successful, it will signal a
+    * After successfullty bulding Dockerfile,**Note: After troubleshooting, Dockerfile naming is case sensitive**, to verify the container is successful, it will signal below. Command ``docker ps -a`` also shows running built images start time and tag name. 
+```bash
+Build at: 2025-04-09T22:31:34.343Z - Hash: c79711fd8a99397d - Time: 33912ms
+
+** Angular Live Development Server is listening on 0.0.0.0:3000, open your browser on http://localhost:3000/ **
+
+
+✔ Compiled successfully.
+✔ Browser application bundle generation complete.
+```
     * In host side the ``http://localhost:3000``, will verify if application is run. 
+    
    
   * After Dockerfile is completed, you have to build it with -t docker option ``docker build -t angular-site .``
   * We then run and start the build with ``docker run -p 3000:3000 angular-site`` that maps the container and local host to serve contents.
 
   * Dockerhub repositories can be created in DockerHub in **My Hub** The first side option list Repositores that can be created to pull and push builds. Create Repository can be pushed to name the repo and set visibility options to public. To access at PAT for CLI authentication for tracking, and collaboration. To create a PAT is found in Account Settings->Personal access Tokens-> Generate. It has personalized options for use.
-  * After generating, it will give run and personal access token command. This authenticate Dockerhub via CLI personal credentials. After this we can push the container from the command line to Dockerhub with these commands after successfuflly logging in.
-  * Here is a link to my project for serving angular site web application.  
+  * After generating, it will give run and personal access token command. This authenticate Dockerhub via CLI personal credentials with ``docker login -u bewinggs``. After this we can push the container from the command line to Dockerhub with these commands after successfuflly logging in.
+  * Here is a link to my project for serving angular site web application with tag references. 
+  * [Angular-site Image](https://hub.docker.com/r/bewinggs/ewing-ceg3120/tags)
+  * After logging in I used docker tag option to tage the image with useful name and pushed it to ceg-3120 repository with these commands ``docker tag angular-site bewinggs/ewing-ceg3120:angular-site`` ``docker push bewinggs/ewing-ceg3120:angular-site``. 
  
   * Sources
     * [Course Notes and Inclass demonstrations on docker installation and docker run command](https://github.com/pattonsgirl/CEG3120/blob/main/CourseNotes/containers.md)
@@ -45,13 +57,10 @@ The project encases docker. It is a container manager that will create, run , an
        * This showed option description of the run command. I referenced those and examplanary docker run commands like  mounting volumes without building an image.  
     * [DockerFile TODO](https://dev.to/rodrigokamada/creating-and-running-an-angular-application-in-a-docker-container-40mk)
        * I referenced this source heavily as it related similar to the conditions of the angular site but with a different node image. I decided to expose a random port personally, but they used the default port for the local host.
-       * [Dockerhub IO](https://docs.docker.com/security/for-developers/access-tokens/#:~:text=You%20can%20create%20a%20personal,you%20find%20any%20suspicious%20activity.)
-         * The was referenced in working with dockerhub, It showed how to create access token and the benefits of it for a dockerhub repository. 
-
-## DockerHub Details 
-
-* To create a public repo in Dockerhub, I
-* To push a container image to dockerhub, I 
-* This is my Dockerhub Repository 
+    * [Dockerhub IO](https://docs.docker.com/security/for-developers/access-tokens/#:~:text=You%20can%20create%20a%20personal,you%20find%20any%20suspicious%20activity.)
+       * The was referenced in working with dockerhub, It showed how to create access token and the benefits of it for a dockerhub repository. 
+    * [DockerPush IO](https://docs.docker.com/get-started/introduction/build-and-push-first-image/)
+       * The was referenced in how to push your first image with repository and image name. 
+ 
 
 
