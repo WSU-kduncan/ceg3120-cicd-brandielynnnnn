@@ -33,13 +33,14 @@ The project encases docker. It is a container manager that will create, run , an
 ```bash
 Build at: 2025-04-09T22:31:34.343Z - Hash: c79711fd8a99397d - Time: 33912ms
 
-** Angular Live Development Server is listening on 0.0.0.0:3000, open your browser on http://localhost:3000/ **
+* Angular Live Development Server is listening on 0.0.0.0:3000, open your browser on http://localhost:3000/ **
 
 
 ✔ Compiled successfully.
 ✔ Browser application bundle generation complete.
 ```
-    * In host side the ``http://localhost:3000``, will verify if application is run. 
+
+ * In host side the ``http://localhost:3000``, will verify if application is run. 
     
    
   * After Dockerfile is completed, you have to build it with -t docker option ``docker build -t angular-site .``
@@ -51,16 +52,16 @@ Build at: 2025-04-09T22:31:34.343Z - Hash: c79711fd8a99397d - Time: 33912ms
   * [Angular-site Image](https://hub.docker.com/r/bewinggs/ewing-ceg3120/tags)
   * After logging in I used docker tag option to tage the image with useful name and pushed it to ceg-3120 repository with these commands ``docker tag angular-site bewinggs/ewing-ceg3120:angular-site`` ``docker push bewinggs/ewing-ceg3120:angular-site``. 
  
-  * Sources
+  * Cited Sources
     * [Course Notes and Inclass demonstrations on docker installation and docker run command](https://github.com/pattonsgirl/CEG3120/blob/main/CourseNotes/containers.md)
     * [Docker Run TODO ](https://docs.docker.com/reference/cli/docker/container/run/)
        * This showed option description of the run command. I referenced those and examplanary docker run commands like  mounting volumes without building an image.  
     * [DockerFile TODO](https://dev.to/rodrigokamada/creating-and-running-an-angular-application-in-a-docker-container-40mk)
        * I referenced this source heavily as it related similar to the conditions of the angular site but with a different node image. I decided to expose a random port personally, but they used the default port for the local host.
     * [Dockerhub IO](https://docs.docker.com/security/for-developers/access-tokens/#:~:text=You%20can%20create%20a%20personal,you%20find%20any%20suspicious%20activity.)
-       * The was referenced in working with dockerhub, It showed how to create access token and the benefits of it for a dockerhub repository. 
+       * This site was referenced in working with dockerhub, It showed how to create access token and the benefits of it for a dockerhub repository. 
     * [DockerPush IO](https://docs.docker.com/get-started/introduction/build-and-push-first-image/)
-       * The was referenced in how to push your first image with repository and image name. 
+       * This dockerhub documentation site was referenced in how to push your first image with repository and image name docker push command.  
  
 
 
