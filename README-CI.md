@@ -65,15 +65,17 @@ Build at: 2025-04-09T22:31:34.343Z - Hash: c79711fd8a99397d - Time: 33912ms
 
 * 
  ## Citations 
-    * [Course Notes and Inclass demonstrations on docker installation and docker run command](https://github.com/pattonsgirl/CEG3120/blob/main/CourseNotes/containers.md)
-    * [Docker Run TODO ](https://docs.docker.com/reference/cli/docker/container/run/)
-       * This showed option description of the run command. I referenced those and examplanary docker run commands like  mounting volumes without building an image.  
-    * [DockerFile TODO](https://dev.to/rodrigokamada/creating-and-running-an-angular-application-in-a-docker-container-40mk)
-       * I referenced this source heavily as it related similar to the conditions of the angular site but with a different node image. I decided to expose a random port personally, but they used the default port for the local host.
-    * [Dockerhub IO](https://docs.docker.com/security/for-developers/access-tokens/#:~:text=You%20can%20create%20a%20personal,you%20find%20any%20suspicious%20activity.)
-       * This site was referenced in working with dockerhub, It showed how to create access token and the benefits of it for a dockerhub repository. 
-    * [DockerPush IO](https://docs.docker.com/get-started/introduction/build-and-push-first-image/)
-       * This dockerhub documentation site was referenced in how to push your first image with repository and image name docker push command.  
+ 
+ * [Course Notes and Inclass demonstrations on docker installation and docker run command](https://github.com/pattonsgirl/CEG3120/blob/main/CourseNotes/containers.md)
+ * [Docker Run TODO ](https://docs.docker.com/reference/cli/docker/container/run/)
+   
+   * This showed option description of the run command. I referenced those and examplanary docker run commands like  mounting volumes without building an image.  
+* [DockerFile TODO](https://dev.to/rodrigokamada/creating-and-running-an-angular-application-in-a-docker-container-40mk)
+   * I referenced this source heavily as it related similar to the conditions of the angular site but with a different node image. I decided to expose a random port personally, but they used the default port for the local host.
+* [Dockerhub IO](https://docs.docker.com/security/for-developers/access-tokens/#:~:text=You%20can%20create%20a%20personal,you%20find%20any%20suspicious%20activity.)
+   * This site was referenced in working with dockerhub, It showed how to create access token and the benefits of it for a dockerhub repository.
+* [DockerPush IO](https://docs.docker.com/get-started/introduction/build-and-push-first-image/)
+   * This dockerhub documentation site was referenced in how to push your first image with repository and image name docker push command.  
  
 
 
