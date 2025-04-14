@@ -50,9 +50,21 @@ Build at: 2025-04-09T22:31:34.343Z - Hash: c79711fd8a99397d - Time: 33912ms
   * After generating, it will give run and personal access token command. This authenticate Dockerhub via CLI personal credentials with ``docker login -u bewinggs``. After this we can push the container from the command line to Dockerhub with these commands after successfuflly logging in.
   * Here is a link to my project for serving angular site web application with tag references. 
   * [Angular-site Image](https://hub.docker.com/r/bewinggs/ewing-ceg3120/tags)
-  * After logging in I used docker tag option to tage the image with useful name and pushed it to ceg-3120 repository with these commands ``docker tag angular-site bewinggs/ewing-ceg3120:angular-site`` ``docker push bewinggs/ewing-ceg3120:angular-site``. 
- 
-  * Cited Sources
+  * After logging in I used docker tag option to tage the image with useful name and pushed it to ceg-3120 repository with these commands ``docker tag angular-site bewinggs/ewing-ceg3120:angular-site`` ``docker push bewinggs/ewing-ceg3120:angular-site``.
+
+
+## Github Actions 
+
+* To set up github actions, we have to set a connection to our dockerhub repository. A PAT allows for this connection to the Dockerhub repository. I created a PAT with read, and write permisions. This is for.... For Github actions, a repository secret was added to this repository eith my docke username and docker personal access token. The secrets set
+
+* For CI with Github Actions, a workflow YAML file is implemented. I used a base templent similar to project requirements from this
+* The workflow steps are
+* If this is used in different repository 
+
+* To **verify it worked** , I
+
+* 
+ ## Citations 
     * [Course Notes and Inclass demonstrations on docker installation and docker run command](https://github.com/pattonsgirl/CEG3120/blob/main/CourseNotes/containers.md)
     * [Docker Run TODO ](https://docs.docker.com/reference/cli/docker/container/run/)
        * This showed option description of the run command. I referenced those and examplanary docker run commands like  mounting volumes without building an image.  
