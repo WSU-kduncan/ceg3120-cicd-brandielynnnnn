@@ -55,16 +55,19 @@ Build at: 2025-04-09T22:31:34.343Z - Hash: c79711fd8a99397d - Time: 33912ms
 
 ## Github Actions 
 
-* To set up github actions, we have to set a connection to our dockerhub repository. A PAT allows for this connection to the Dockerhub repository. I created a PAT with read, and write permisions. This is for.... For Github actions, a repository secret was added to this repository eith my docke username and docker personal access token. The secrets set
+* Github Actions allows for **CI** integration to control application builds from Github. To utilize this, we can to set a connection to our dockerhub repository and workflow file for github to read and implement. A PAT allows for this connection to the Dockerhub repository. I created a PAT with read, and write, and delete permisions. This is for pulling images, testing and building them by managing the dockerhub build from Github. Once the Dockerhub gives PAT, we can utizle a secrets repository sheet that can be found in Repo Settings under Security->Secrets and Variables-->Repository Secrets, here we enter a username and token entry with dockerhub username and token.
+  * To create my [workflow sheet](https://github.com/WSU-kduncan/ceg3120-cicd-brandielynnnnn/blob/babcf60ac278de69d79b0afdee72deb844093e81/.github/workflows/build.yml) a subdirectory of .github/workflows is created for managability. In this directory, a build.yml is created to start YAML configuration template. For my yml sheet I used template in [ Docker Github Actions Documentations](https://github.com/docker/build-push-action#git-context) that indicates a CI automation for the angular application.
+  * As stated, It uses YAML syntax that firstly uses "name:" that names the work flow where it is displayed in Actions.
+  * The on value verifies the push and which branch to implement the process. 
+  * The Job is signaling a docker automation that runs on WSL ubuntu in "ubuntu:latest". It then lists steps that the workflow will complete for the process.
+  * The steps are seperated with name and uses: values. The uses value selects an action that is already defined in the public docker repository in `docker/login-action@v3` and `docker/build-push-action@v6`. These actions logins to Docker with the PAT credentials saved to the repository secrets and builds and push the build angular container. 
+  * With the use it notifies if a push is implemented and tags the push with "bewinggs/ewing-ceg3120:latest"
+  * **Troubleshooting Note: Syntax is very important with tabing locatings and where - is located**
+  * Here is the working workflow sheet. [Build.yml](https://github.com/WSU-kduncan/ceg3120-cicd-brandielynnnnn/blob/babcf60ac278de69d79b0afdee72deb844093e81/.github/workflows/build.yml)
 
-* For CI with Github Actions, a workflow YAML file is implemented. I used a base templent similar to project requirements from this
-* The workflow steps are
-* If this is used in different repository 
-
-* To **verify it worked** , I
-tesing workflow it is not rendering 
-* 
- ## Citations 
+   
+* For verification 
+ ## Citations Part 
  
  * [Course Notes and Inclass demonstrations on docker installation and docker run command](https://github.com/pattonsgirl/CEG3120/blob/main/CourseNotes/containers.md)
  * [Docker Run TODO ](https://docs.docker.com/reference/cli/docker/container/run/)
@@ -75,7 +78,13 @@ tesing workflow it is not rendering
 * [Dockerhub IO](https://docs.docker.com/security/for-developers/access-tokens/#:~:text=You%20can%20create%20a%20personal,you%20find%20any%20suspicious%20activity.)
    * This site was referenced in working with dockerhub, It showed how to create access token and the benefits of it for a dockerhub repository.
 * [DockerPush IO](https://docs.docker.com/get-started/introduction/build-and-push-first-image/)
-   * This dockerhub documentation site was referenced in how to push your first image with repository and image name docker push command.  
+   * This dockerhub documentation site was referenced in how to push your first image with repository and image name docker push command.
+* [Workflow Template](https://github.com/docker/build-push-action#git-context)
+   * This is referenced in creating the YAML syntax for the build.yml. It gave a base CI template I followed from In class demonstrations,
+ * [Github Actions Workflows Syntax Meanings](https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions#jobsjob_idsecretssecret_id)
+   * This is referenced when explaining how Github reads and implements the workflow syntax to automate the build process.
+   
+
  
 
 
