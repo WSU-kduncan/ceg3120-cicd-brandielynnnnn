@@ -1,23 +1,23 @@
-name: ci workflow for building with docker 
+name: ci workflow for building with docker
 
 on:
   push:
     branches: 
-      -main 
+      - main
 
 jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      -
-        name: Login to Docker Hub
+      - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUBUSER }}
           password: ${{ secrets.DOCKERHUBTOKEN }}
-      -
-        name: Build and push
+
+      - name: Build and push
         uses: docker/build-push-action@v6
         with:
           push: true
           tags: bewinggs/ewing-ceg3120:latest
+
