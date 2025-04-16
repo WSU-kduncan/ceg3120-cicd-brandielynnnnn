@@ -58,15 +58,18 @@ Build at: 2025-04-09T22:31:34.343Z - Hash: c79711fd8a99397d - Time: 33912ms
 * Github Actions allows for **CI** integration to control application builds from Github. To utilize this, we can to set a connection to our dockerhub repository and workflow file for github to read and implement. A PAT allows for this connection to the Dockerhub repository. I created a PAT with read, and write, and delete permisions. This is for pulling images, testing and building them by managing the dockerhub build from Github. Once the Dockerhub gives PAT, we can utizle a secrets repository sheet that can be found in Repo Settings under Security->Secrets and Variables-->Repository Secrets, here we enter a username and token entry with dockerhub username and token.
   * To create my [workflow sheet](https://github.com/WSU-kduncan/ceg3120-cicd-brandielynnnnn/blob/babcf60ac278de69d79b0afdee72deb844093e81/.github/workflows/build.yml) a subdirectory of .github/workflows is created for managability. In this directory, a build.yml is created to start YAML configuration template. For my yml sheet I used template in [ Docker Github Actions Documentations](https://github.com/docker/build-push-action#git-context) that indicates a CI automation for the angular application.
   * As stated, It uses YAML syntax that firstly uses "name:" that names the work flow where it is displayed in Actions.
-  * The on value verifies the push and which branch to implement the process. 
-  * The Job is signaling a docker automation that runs on WSL ubuntu in "ubuntu:latest". It then lists steps that the workflow will complete for the process.
-  * The steps are seperated with name and uses: values. The uses value selects an action that is already defined in the public docker repository in `docker/login-action@v3` and `docker/build-push-action@v6`. These actions logins to Docker with the PAT credentials saved to the repository secrets and builds and push the build angular container. 
+  * The on: value verifies the push and which branch to implement the process. 
+  * The job: values are signaling a docker automation that runs on WSL ubuntu in "ubuntu:latest". It then lists steps that the workflow will complete for the process.
+  * The steps are seperated with name and uses: values. The uses: value selects an action that is already defined in the public docker repository in `docker/login-action@v3` and `docker/build-push-action@v6`. These actions logins to Docker with the PAT credentials saved to the repository secrets and builds and push the build angular container to my repository in [Dockerhub](https://hub.docker.com/repository/docker/bewinggs/ewing-ceg3120/general). 
   * With the use it notifies if a push is implemented and tags the push with "bewinggs/ewing-ceg3120:latest"
-  * **Troubleshooting Note: Syntax is very important with tabing locatings and where - is located**
+  * **Troubleshooting Note: Syntax is very important with tabing locatings and where - is located.**
   * Here is the working workflow sheet. [Build.yml](https://github.com/WSU-kduncan/ceg3120-cicd-brandielynnnnn/blob/babcf60ac278de69d79b0afdee72deb844093e81/.github/workflows/build.yml)
-
+ * **If used in different repository update secrets content in repository and tags for pushes so that it matches personal Docker hub username and repository.** These are the username: and password: values and tags: values in workflow syntax. 
    
-* For verification 
+* For **verification**, The [Actions](https://github.com/WSU-kduncan/ceg3120-cicd-brandielynnnnn/actions) Tab in the repository. This shows build times and logs of how the build and push to Dockerhub was implemented. It is very useful to verify if processes is completed. If failed it gives logs of each step under "Annotations". To verify if the tasks of building and pushing docker, dockerhub repository should show a Last pushed: with similar time of last push to Github.
+* That way when we pull and run the docker application locally  with (docker run -p 3000:3000 bewinggs/ewing-ceg3120:latest) it will start up from the build in Github Actions.
+
+  
  ## Citations Part 
  
  * [Course Notes and Inclass demonstrations on docker installation and docker run command](https://github.com/pattonsgirl/CEG3120/blob/main/CourseNotes/containers.md)
