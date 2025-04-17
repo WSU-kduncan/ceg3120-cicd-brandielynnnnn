@@ -6,7 +6,7 @@ The project encases docker. It is a container manager that will create, run , an
 
 ## Docker Configuration Detailing 
 * To install docker on wsl2-ubuntu, I added a resource on docker desktop. I downloaded docker desktop from the [dockers installation website](https://docs.docker.com/desktop/features/wsl/) that downloads it on the backend of Windows. Once the installer is downloaded, I signed in to my personal account and accessed Settings->Resource->WSL 2 integration->Apply and Restart. After restarting computer, relaunching docker desktop to signal it to start engine is **required.**
- * I utilize a windows computer, therefore docker desktop dependences needs **wsl2 installation backend**. After installing, the command ``docker --version`` will show version and if docker is signalled as engine on wsl2. 
+ * I utilize a windows computer, therefore docker desktop dependences needs **wsl2 installation backend**. After installing, the command ``docker --version`` will show version and if docker is signalled as engine on wsl2 and ``docker run hello-world`` which is an example given of docker when installed shows that docker can run containers. 
 * To build and configure a container without building an image I used the docker run command
   * The command come with options to configure how the container runs.
   * ``docker run -it --rm -v /home/bewing/ceg3120-cicd-brandielynnnnn/angular-site/wsu-hw-ng-main:/app -w /app -p 3000:3000 node:18-bullseye bash``
@@ -46,7 +46,7 @@ Build at: 2025-04-09T22:31:34.343Z - Hash: c79711fd8a99397d - Time: 33912ms
   * After Dockerfile is completed, you have to build it with -t docker option ``docker build -t angular-site .``
   * We then run and start the build with ``docker run -p 3000:3000 angular-site`` that maps the container and local host to serve contents.
 
-  * Dockerhub repositories can be created in DockerHub in **My Hub** The first side option list Repositores that can be created to pull and push builds. Create Repository can be pushed to name the repo and set visibility options to public. To access at PAT for CLI authentication for tracking, and collaboration. To create a PAT is found in Account Settings->Personal access Tokens-> Generate. It has personalized options for use.
+  * Dockerhub repositories can be created in DockerHub in **My Hub** The first side option list Repositores that can be created to pull and push builds. Create Repository can be pushed to name the repo and set visibility options to public. To access at PAT for CLI authentication for tracking, and collaboration. To create a PAT is found in Account Settings->Personal access Tokens-> Generate. It has personalized options for use. The scope of the Personal Access Token is Set to read and write to strengthen dockerfile protection. 
   * After generating, it will give run and personal access token command. This authenticate Dockerhub via CLI personal credentials with ``docker login -u bewinggs``. After this we can push the container from the command line to Dockerhub with these commands after successfuflly logging in.
   * Here is a link to my project for serving angular site web application with tag references. 
   * [Angular-site Image](https://hub.docker.com/r/bewinggs/ewing-ceg3120/tags)
@@ -69,12 +69,25 @@ Build at: 2025-04-09T22:31:34.343Z - Hash: c79711fd8a99397d - Time: 33912ms
 * For **verification**, looking at the [Actions](https://github.com/WSU-kduncan/ceg3120-cicd-brandielynnnnn/actions) Tab in the repository is necessary. This shows build times and logs of how the build and push to Dockerhub was implemented. If failed it gives logs of each step under "Annotations". To verify if the tasks of building and pushing docker, personal dockerhub repository should show a Last pushed: with similar time of last push to Github.
 * That way when we pull and run the docker application locally in a container with (docker run -p 3000:3000 bewinggs/ewing-ceg3120:latest) it will start up from the build in Github Actions.
 
+  ## CI Implementation Diagram
+
+  * AS stated Continuous Integration is beneficial for developer workspaces to manage project tracking. In this implementation, Github is used to continously keep content up to date on the DockerHub Github Repository we are using for managing the angular-site web application. We utilized a Dockerfile to automize new builds through docker. A workflow file allows communication across Github and Dockerhub to sync site content. The goal of this project was to automate integrating working copies of our application to a public repository across different platforms of service for version history and sharing.  Below is a Diagram that of the CI process relative to the Project. 
+ 
+ ```mermaid
+flowchart LR
+    id1[[Admin creates Dockerfile for docker application to read and implement]]-->id2[[Admin creates .github/workflow file to set CI configuration for connection to dockerhub]]-->id3{{Developer edits site contents through Public Github Repo}}-->id4{{Developer Pushes Commit to Main Branch}}-->id5[(Github Repo through Actions through workflow file in public repository to login to Dockerhub with credentials and build and push Dockerfile Image)]-->id6[(Dockerhub then pushes the image and it now synced with Github Commits to further run and test content editted by developer)]
+    
+    
+    
+
+```
+
   
  ## Citations 
  
- * [Course Notes and Inclass demonstrations on docker installation and docker run command](https://github.com/pattonsgirl/CEG3120/blob/main/CourseNotes/containers.md)
- * [Docker Run TODO ](https://docs.docker.com/reference/cli/docker/container/run/)
-   
+ * [Docker Course Notes and Inclass demonstrations on docker installation and docker run command](https://github.com/pattonsgirl/CEG3120/blob/main/CourseNotes/containers.md)
+ * [CI Course Notes used for Diagram Part 3](https://github.com/pattonsgirl/CEG3120/blob/main/CourseNotes/continuous-integration.md)
+ * [Docker Run TODO ](https://docs.docker.com/reference/cli/docker/container/run/)   
    * This showed option description of the run command. I referenced those and examplanary docker run commands like  mounting volumes without building an image.  
 * [DockerFile TODO](https://dev.to/rodrigokamada/creating-and-running-an-angular-application-in-a-docker-container-40mk)
    * I referenced this source heavily as it related similar to the conditions of the angular site but with a different node image. I decided to expose a random port personally, but they used the default port for the local host.
@@ -83,9 +96,11 @@ Build at: 2025-04-09T22:31:34.343Z - Hash: c79711fd8a99397d - Time: 33912ms
 * [DockerPush IO](https://docs.docker.com/get-started/introduction/build-and-push-first-image/)
    * This dockerhub documentation site was referenced in how to push your first image with repository and image name docker push command.
 * [Workflow Template](https://github.com/docker/build-push-action#git-context)
-   * This is referenced in creating the YAML syntax for the build.yml. It gave a base CI template I followed from In class demonstrations,
+   * This is referenced in creating the YAML syntax for the build.yml. It gave a base CI template I followed from In class demonstrations.
  * [Github Actions Workflows Syntax Meanings](https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions#jobsjob_idsecretssecret_id)
    * This is referenced when explaining how Github reads and implements the workflow syntax to automate the build process.
+* [Mermaid Flowchart Tutorial](https://mermaid.js.org/syntax/flowchart.html)
+  * I used this to help with mermaid flowchart for CI diagram, I learned about syntax detailing that is required for it to render correctly. 
    
 
  
