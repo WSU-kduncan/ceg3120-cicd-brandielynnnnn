@@ -1,10 +1,7 @@
-# CI Project 4 
+# Continous Integration I Project 4 
 ## Brandie Ewing 
 
-
-The project encases docker. It is a container manager that will create, run , and build a web application name angular-site. This container manager also allows for easy accessibility and disposability with command options. It is installed on the backend of windows wsl and signals instructions from user.
-
-## Docker Configuration Detailing 
+## Docker Configuration  
 * To install docker on wsl2-ubuntu, I added a resource on docker desktop. I downloaded docker desktop from the [dockers installation website](https://docs.docker.com/desktop/features/wsl/) that downloads it on the backend of Windows. Once the installer is downloaded, I signed in to my personal account and accessed Settings->Resource->WSL 2 integration->Apply and Restart. After restarting computer, relaunching docker desktop to signal it to start engine is **required.**
  * I utilize a windows computer, therefore docker desktop dependences needs **wsl2 installation backend**. After installing, the command ``docker --version`` will show version and if docker is signalled as engine on wsl2 and ``docker run hello-world`` which is an example given of docker when installed shows that docker can run containers. 
 * To build and configure a container without building an image I used the docker run command
@@ -69,15 +66,13 @@ Build at: 2025-04-09T22:31:34.343Z - Hash: c79711fd8a99397d - Time: 33912ms
 * For **verification**, looking at the [Actions](https://github.com/WSU-kduncan/ceg3120-cicd-brandielynnnnn/actions) Tab in the repository is necessary. This shows build times and logs of how the build and push to Dockerhub was implemented. If failed it gives logs of each step under "Annotations". To verify if the tasks of building and pushing docker, personal dockerhub repository should show a Last pushed: with similar time of last push to Github.
 * That way when we pull and run the docker application locally in a container with (docker run -p 3000:3000 bewinggs/ewing-ceg3120:latest) it will start up from the build in Github Actions.
 
-  ## CI Implementation Diagram
+## CI Implementation Diagram
 
-  * AS stated Continuous Integration is beneficial for developer workspaces to manage project tracking. In this implementation, Github is used to continously keep content up to date on the DockerHub Github Repository we are using for managing the angular-site web application. We utilized a Dockerfile to automize new builds through docker. A workflow file allows communication across Github and Dockerhub to sync site content. The goal of this project was to automate integrating working copies of our application to a public repository across different platforms of service for version history and sharing.  Below is a Diagram that of the CI process relative to the Project. 
+  * As stated, Continuous Integration is beneficial for developer workspaces to manage project tracking. In this implementation, Github is used to continously keep content up to date on the DockerHub Github Repository we are using for managing the angular-site web application. We utilized a Dockerfile to automize new builds through docker. A workflow file allows communication across Github and Dockerhub to sync site content. The developer utilizes this integration add seamless project updates. The goal of this project was to automate integrating working copies of our application to a public repository across different platforms of service for version history and sharing.  Below is a Diagram that of the CI process relative to this Project. 
  
  ```mermaid
 flowchart LR
-    id1[[Admin creates Dockerfile for docker application to read and implement]]-->id2[[Admin creates .github/workflow file to set CI configuration for connection to dockerhub]]-->id3{{Developer edits site contents through Public Github Repo}}-->id4{{Developer Pushes Commit to Main Branch}}-->id5[(Github Repo through Actions through workflow file in public repository to login to Dockerhub with credentials and build and push Dockerfile Image)]-->id6[(Dockerhub then pushes the image and it now synced with Github Commits to further run and test content editted by developer)]
-    
-    
+    id1[[Admin creates Dockerfile for docker application to read and implement]]-->id2[[Admin creates .github/workflow file to set CI configuration for connection to dockerhub on commit pushes on branch main]]-->id3{{Developer edits site contents through Public Github Repo}}-->id4{{Developer Pushes Commit to Main Branch}}-->id5[(Github Repo through Action workflow file logins to Dockerhub with github secrets)]-->id6[(Dockerhub builds and pushes the image and it now synced process with github pushes to further run and test content edited by developer)]
     
 
 ```
