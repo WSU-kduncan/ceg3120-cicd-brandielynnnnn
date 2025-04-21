@@ -1,14 +1,28 @@
-name: ci workflow for building with docker
+name: ci workflow for building with docker with updated semantic versioning
 
 on:
   push:
-    branches: 
-      - main
+    tags:
+      - "v*.*.*"
 
 jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout of repository
+        uses: actions/checkout@v4
+      -
+        name: meta docker 
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: bewinggs/ewing-ceg3120
+          tags: |
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}}
+            type=raw,value=latest
+        
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
@@ -18,6 +32,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
-          push: true
-          tags: bewinggs/ewing-ceg3120:latest
-
+          context: .
+          push: true 
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }} 
