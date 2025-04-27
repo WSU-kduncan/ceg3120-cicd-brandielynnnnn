@@ -1,2 +1,20 @@
-
-
+[
+	{
+		"id":"cd",
+		"execute-command":"/home/ubuntu/ceg3120-cicd-brandielynnnnn/deployment/cd.sh",
+		"trigger-rule": 
+		{
+			"match":
+			{
+				"type": "value",
+				"value": "banana",
+				"parameter": 
+				{
+					"source": "url",
+					"name": "ceg3120blynn"
+				}
+			}
+		}
+	}
+		
+]
