@@ -19,9 +19,23 @@
   * To verify the image works I can run it in a container with the image and tag name. 
   * Here is the working [Github Workflow File](https://github.com/WSU-kduncan/ceg3120-cicd-brandielynnnnn/blob/14f523ec40b97cab879e2bcf4461bc6663449016/.github/workflows/build.yml)
 
+## Continous Deployment
 
+* In this Continous Deployment, I am working with my EC2 Instance, Dockerhub and Github by setting up a webhook server listener. To create my EC2 instance, I launched a instance on the EC2 resource in AWS. When launching my instance I set the AMI as Ubuntu with ssh access, in t3.medium and recommended 30gb volume for handling docker images. In launching the instance, in security groups, I clicked all three allow of SSH, HTTP, and HTTPs. After launching the instance, I made 2 other security rules to allow inbound traffic for ports 9000, and 3000. Port 9000 is default in webhooks service as it ... Port 3000 is my angular site port bind in the docker file configuration.
+* To set up dockerhub, I used this reference for the commands below
+  * ``sudo apt update``
+  * ``sudo apt-get install docker.io -y``
+  * ``sudo systemctl start docker``
+  * To verify if docker was able to build images in a container this command ``sudo docker run hello-world`` which is a default image provided from docker. This command will give verbose details ``docker ps -a``on image run times, status, names, and port binds.
+* To pull and run a container on EC2 instance, I pulled my image from my Dockerhub Repo ``docker pull bewinggs/ewing-ceg3120:0.5.8``
+* ``docker run -p 3000:3000 bewinggs/ewing-ceg3120:0.5.8``
+* My bash scripts i
 
+* Webhook in the integration is used to ....
 
+* commands to explain
+* ``sudo apt-get install webhook``
+* ``curl http://100.24.119.122:9000/hooks/cd?ceg3120blynn=banana``
 
 
 ## Citations 
