@@ -1,6 +1,8 @@
 # Project 5 Continuous Deployment 
 ## Brandie Ewing
 
+## Project Detailing 
+
 ## Semantic Versioning with Tagging 
 
 * Semantic Versioning a build that is done with github workflows is necessary for seperating builds. For this, tag gernerating each build is important that will be in common with each commit pushed to main in the repository.
@@ -28,14 +30,24 @@
   * ``sudo systemctl start docker``
   * To verify if docker was able to build images in a container this command ``sudo docker run hello-world`` which is a default image provided from docker. This command will give verbose details ``docker ps -a``on image run times, status, names, and port binds.
 * To pull and run a container on EC2 instance, I pulled my image from my Dockerhub Repo ``docker pull bewinggs/ewing-ceg3120:0.5.8``
-* ``docker run -p 3000:3000 bewinggs/ewing-ceg3120:0.5.8``
-* My bash scripts i
+* I used run command stated above for testing semantic versioning ``docker run -p 3000:3000 bewinggs/ewing-ceg3120:0.5.8``and could see from the container side the build was running from ``docker ps -a``. From the host side, a host side curl http://100.24.119.122:3000 showed a running angular application. An external connection on Google Chrome of http://100.24.119.122:9000 showed content serving. 
+* To manually refresh the container application if a new image is available,
+* To automate this process in deployment with Dockerhub, A bash script was templated from [devblog](https://blog.devgenius.io/build-your-first-ci-cd-pipeline-using-docker-github-actions-and-webhooks-while-creating-your-own-da783110e151) that shows the functions of the script. It is made of docker commands, bash will execute during our hooks.json endpoint configuration from Dockerhub. It pulls the latest image from Dockerhub, Stops the running container, Removes the running container. The final step is recreating the container, which will involve a --name flag to reproduce our container name. To test my [Bash Script](https://github.com/WSU-kduncan/ceg3120-cicd-brandielynnnnn/blob/c0b0712cdd8563f92e59933539bd2c6f7fe5e965/deployment/cd.sh) I manually pulled an image from my Dockerhub repository as a start, ran the script, checked ``docker ps -a`` for a new image build.
 
+
+## WebHooks
 * Webhook in the integration is used to ....
 
-* commands to explain
-* ``sudo apt-get install webhook``
-* ``curl http://100.24.119.122:9000/hooks/cd?ceg3120blynn=banana``
+* To install webhooks, command ``sudo apt-get install webhook`` installs webhooks to EC2 instance. To verify a successful I used a ``webhooks --version`` and ``which webhooks`` to see if service files were created.
+* To utilize webhooks, a hook definition is implemented to serve a payload endpoint configuration. Using dockerhub with webhooks, it will send POST request to a URL in Dockerhub. It is in JSON format. This file will be triggered when our tag is pushed and will signal a bash script when a payload is received. It will also validate that the payload came from Dockerhub with a shared secret. 
+* ``curl http://100.24.119.122:9000/hooks/cd?ceg3120blynn=banana`` was put into the **Webhooks** section in Dockerhub Repository with ability to pull history.
+* To verify definition file was loaded by webhook, I
+* To verify webhooks is receiving payloads,
+* Here is [my hooks definition file](https://github.com/WSU-kduncan/ceg3120-cicd-brandielynnnnn/blob/c0b0712cdd8563f92e59933539bd2c6f7fe5e965/deployment/hooks.json)
+
+* For the Payload Sender, as stated, Dockerhub was selected as payload sender because of frequent image and tag handling 
+* To enable my selection to send payloads to EC2 webhook listener, I
+* webhook -hooks /home/ubuntu/ceg/hooks.json -verbose
 
 
 ## Citations 
@@ -46,4 +58,8 @@
 * [Dockerhub Github Actions Workflow File Template](https://docs.docker.com/build/ci/github-actions/manage-tags-labels/)
     * This is referenced heavily in my workflow file as it give syntax for utilizing new metadata action for dockerhub tag managing.
 * [Github Workflow Syntax Meanings](https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions)
-    * I used this reference is detail syntax usage in documentation to explain critical usage in workflow file. 
+    * I used this reference is detail syntax usage in documentation to explain critical usage in workflow file.
+* [Dev Genius Docker/Webhooks CD](https://blog.devgenius.io/build-your-first-ci-cd-pipeline-using-docker-github-actions-and-webhooks-while-creating-your-own-da783110e151)
+* [Web Hooks](https://github.com/adnanh/webhook)
+* [Web Hooks Delivery](https://docs.docker.com/docker-hub/repos/manage/webhooks/)
+* 
