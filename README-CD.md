@@ -3,7 +3,14 @@
 
 ## Project Detailing 
 
-This prokect 
+This goal of this project is to implement a workflow of Continuoss while designing and developing the angular site application. Github is used for pushing changes and semantic tagging to shared repository while also using workflow file to push and implement changed images to Dockerhub. Dockerhub is out enfpoint deployment where webhooks is enabled to show work payloads for new images and tags for managing url usages. Below is a diagram explaining concepts and usages of this CD implementation. 
+
+ ```mermaid
+flowchart LR
+    id4{{Developer Pushes Commit to Main Branch}}-->id5{{Developer Pushes Tag to Main Branch}}-->id6[[Github workflow file builds and pushes tagged image to dockerhub with metadata action]]-->id7[[Dockerhub receives semantic tag and latest image build]]-->id8>Webhooks payload is triggered to send payload posts on new images to EC2 server IP]-->id9[(EC2 webhook service listener gets logs from 54.224.95.223:9000 to then execute cd.sh build refresh script when payload is received)]
+    
+
+```
 
 ## Semantic Versioning with Tagging 
 
@@ -63,14 +70,13 @@ This prokect
   * ``sudo systemctl start webhook.service``
   * `` sudo systemctl status webhook.service``
   * `` sudo vim /usr/lib/systemd/system/webhook.service``
-  * After making the execstart change, the services need to be restarted with commands ``sudo systemctl daemon-reload`` to implement changes on the webhook.service file. Here is my service file for this configuration 
-    
+  * After making the execstart change, the services need to be restarted with commands ``sudo systemctl daemon-reload`` to implement changes on the webhook.service file. Here is my service file for this configuration. After this checking status and logs with command ``sudo journalctl -f -u webhook.service`` shows detailed output of service on EC2 instance loading and servering hooks on **http://0.0.0.0:9000/hooks/{id}**. Here is my [webhooks.service](https://github.com/WSU-kduncan/ceg3120-cicd-brandielynnnnn/blob/a614a790bb768464c1f05421fd24b864bbd75fec/deployment/webhook.service) file loaded on server. 
     
 
 
 ## Citations 
-
-* [CD Course Notes](https://github.com/pattonsgirl/CEG3120/blob/ee78618c1fc25096819ed677f2083c4e2397b720/CourseNotes/continuous-deployment.md)
+* [CD Course Notes for help links](https://github.com/pattonsgirl/CEG3120/blob/ee78618c1fc25096819ed677f2083c4e2397b720/CourseNotes/continuous-deployment.md)
+* In Class Demonstrations(Webex Recordings Last two 4/23 and 4/25 for webhooks.service file)
 * [Semantic Versioning Documentation](https://semver.org/)
     * This is referenced in deciding version tag versioning for my docker build. 
 * [Dockerhub Github Actions Workflow File Template](https://docs.docker.com/build/ci/github-actions/manage-tags-labels/)
@@ -78,6 +84,9 @@ This prokect
 * [Github Workflow Syntax Meanings](https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions)
     * I used this reference is detail syntax usage in documentation to explain critical usage in workflow file.
 * [Dev Genius Docker/Webhooks CD](https://blog.devgenius.io/build-your-first-ci-cd-pipeline-using-docker-github-actions-and-webhooks-while-creating-your-own-da783110e151)
+    * I used this heavily in this lab as it gave very sufficient directions and paths on implementing a github, webhook, dockerhub deployment for our angular application. It also gave me install intructions for my ubuntu AMI of docker and webhooks while also supplying bash script template and useful webhooks commands. 
 * [Web Hooks](https://github.com/adnanh/webhook)
+    * This is documentation for webhooks by adnanh that gave installation details and webhook examples. 
 * [Web Hooks Delivery](https://docs.docker.com/docker-hub/repos/manage/webhooks/)
+    * This gave good details on using and configuring dockerhub as endpoing delivery for payload mananagemetn and posts. 
   
